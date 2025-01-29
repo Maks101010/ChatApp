@@ -7,7 +7,6 @@
 // Copyright © 2025 Differenz System Pvt. Ltd. All rights reserved.
 //
 
-
 import Foundation
 import SwiftUI
 import FirebaseFirestore
@@ -16,6 +15,7 @@ import FirebaseFirestore
 
 enum FBDataStoreCollection : String {
     case users = "Users"
+    case chats = "Chats"
 }
 
 
@@ -60,6 +60,26 @@ extension FireBaseDataStore {
             }
             
         }
+    }
+}
+
+
+extension FireBaseDataStore {
+    func setChatData(roomId : String ,chatData : [String : Any] , completion:@escaping (() -> ())){
+        self.db.getCollection(.chats).document(roomId).setData(chatData) { error in
+            if let error = error {
+                print("error for seting the chatData with roomId \(roomId) , error : \(error.localizedDescription)")
+            }
+            else {
+                completion()
+            }
+        }
+    }
+}
+
+extension FireBaseDataStore {
+    func getAllChatDocuments(completion:@escaping (()->())){
+        
     }
 }
 

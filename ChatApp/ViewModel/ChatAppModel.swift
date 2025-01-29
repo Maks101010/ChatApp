@@ -7,10 +7,11 @@
 // Copyright © 2025 Differenz System Pvt. Ltd. All rights reserved.
 //
 
-
 import Foundation
+import SwiftUI
+
 class ChatAppModel: ObservableObject {
     init () {}
     static var shared: ChatAppModel = ChatAppModel()
-    @Published var themeColor = UserDefaults.themeColor
+    @Published var themeColor = Color.gray//UserDefaults.themeColor
 }

@@ -19,8 +19,6 @@ class AlertData {
     var message: String
     var isLogOut: Bool
     
-    
-    
     private(set) var dismissButton: Alert.Button = .default(Text("OK"))
     
     init(title: String, message: String, isLogOut: Bool) {

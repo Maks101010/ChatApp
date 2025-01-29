@@ -7,14 +7,13 @@
 // Copyright © 2024 Differenz System Pvt. Ltd. All rights reserved.
 //
 
-
-
 import Foundation
 import SwiftUI
 import UIKit
+
 struct TextFieldView:View {
     var placeholder :String
-    var color : Color = .black
+    var color : Color = .white
     @Binding var text : String
     @FocusState var focus
     var body: some View {
@@ -25,13 +24,13 @@ struct TextFieldView:View {
                 .padding(.leading)
                 .frame(height: 50)
                 .focused($focus)
-                .background(focus ? ChatAppModel.shared.themeColor : Color.white ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
+                .background(focus ? Color.AppBrownColor : Color.AppBrownColor ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
                 .autocapitalization(.none)
                 
             Text(placeholder)
                 .padding(.horizontal,5)
                 .background(color.opacity(focus || !text.isEmpty ? 1 : 0))
-                .foregroundStyle(focus ? ChatAppModel.shared.themeColor : Color.white)
+                .foregroundStyle(focus ? Color.AppBrownColor : Color.gray)
                 .padding(.leading)
                 .offset(x : focus || !text.isEmpty ? 5 : 0 ,y : focus || !text.isEmpty ? -25 : 0)
                 .scaleEffect(focus ? 1.1 : 1)
@@ -48,7 +47,7 @@ struct TextFieldView:View {
 struct SecureFieldView:View {
     @State var isSecure = true
     var placeholder :String
-    var color : Color = .black
+    var color : Color = .white
     @Binding var text : String
     @FocusState var focus
     var body: some View {
@@ -81,12 +80,12 @@ struct SecureFieldView:View {
                 .padding(.leading)
                 .frame(height: 50)
                 .focused($focus)
-                .background(focus ? ChatAppModel.shared.themeColor : Color.white ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
+                .background(focus ? Color.AppBrownColor : Color.AppBrownColor ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
                 
             Text(placeholder)
                 .padding(.horizontal,5)
                 .background(color.opacity(focus || !text.isEmpty ? 1 : 0))
-                .foregroundStyle(focus ? ChatAppModel.shared.themeColor : Color.white)
+                .foregroundStyle(focus ? Color.AppBrownColor : Color.gray)
                 .padding(.leading)
                 .offset(x : focus || !text.isEmpty ? 5 : 0   , y : focus || !text.isEmpty ? -25 : 0)
                 .scaleEffect(focus   ? 1.1 : 1)
@@ -111,10 +110,8 @@ struct ButtonView:View {
                 .foregroundColor(Color.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(ChatAppModel.shared.themeColor)
+                .background(Color.AppBrownColor)
                 .cornerRadius(20)
-                
-               
         }
         .buttonStyle(shinkingButton())
     }
@@ -134,8 +131,7 @@ struct GenderPicker : View {
             TextField("", text: $text)
                 .padding(.leading)
                 .frame(height: 50)
-                
-                .background(focus || pickerIsThere ? ChatAppModel.shared.themeColor : Color.white ,in: RoundedRectangle(cornerRadius:20).stroke(lineWidth: 2))
+                .background(focus || pickerIsThere ? Color.AppBrownColor : Color.AppBrownColor ,in: RoundedRectangle(cornerRadius:20).stroke(lineWidth: 2))
                 .autocapitalization(.none)
                 .disabled(true)
                 .onTapGesture {
@@ -146,8 +142,8 @@ struct GenderPicker : View {
                 
             Text(placeholder)
                 .padding(.horizontal,5)
-                .background(Color.black.opacity(pickerIsThere || focus || !text.isEmpty ? 1 : 0))
-                .foregroundStyle(pickerIsThere || focus ? ChatAppModel.shared.themeColor : Color.white)
+                .background(Color.white.opacity(pickerIsThere || focus || !text.isEmpty ? 1 : 0))
+                .foregroundStyle(pickerIsThere || focus ? Color.AppBrownColor : Color.gray)
                 .padding(.leading)
                 .offset( x : pickerIsThere || focus || !text.isEmpty ? 5 : 0 , y : pickerIsThere || focus || !text.isEmpty ? -25 : 0)
                 .scaleEffect(pickerIsThere || focus ? 1.1 : 1)
@@ -160,11 +156,7 @@ struct GenderPicker : View {
             
         }
         .animation(.linear(duration: 0.2), value: focus || pickerIsThere)
-        
         .focused($focus)
-        
-        
-        
         .sheet(isPresented: $pickerIsThere, content: {
             PickerView1()
                 .presentationDetents([.height(250), .fraction(0.50)])
@@ -175,50 +167,44 @@ extension GenderPicker {
     func PickerView1() -> some View {
         NavigationStack{
             List(Array((Gender).enumerated()),id: \.element){ index, gender in
-                
-            
-               
                 Text("\(gender)")
                     .foregroundStyle(Color.white)
-            
-            
-           
-            .onTapGesture {
-                    focus = true
-                    text = gender
-                    pickerIsThere = false
-            }
-            .swipeActions(edge:index % 2 == 0 ? HorizontalEdge.leading : HorizontalEdge.trailing){
-                Button(action:{
-                    text = gender
-                    pickerIsThere = false
-                }){
-                    Image(systemName: "arrow.up.right")
-                        .symbolRenderingMode(.palette)
-                }
-                .tint(Color.black.opacity(0.3))
-                .foregroundStyle(ChatAppModel.shared.themeColor)
-            }
-            .contextMenu{
-                Button(action:{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    .font(.system(size: 20))
+                
+                    .onTapGesture {
+                        focus = true
                         text = gender
                         pickerIsThere = false
-                        
-                    })
-                   
-                }){
-                    Text( "Select It . ")
-                        
-                }
+                    }
+                    .swipeActions(edge:index % 2 == 0 ? HorizontalEdge.leading : HorizontalEdge.trailing){
+                        Button(action:{
+                            text = gender
+                            pickerIsThere = false
+                        }){
+                            Image(systemName: "arrow.up.right")
+                                .symbolRenderingMode(.palette)
+                        }
+                        .tint(Color.AppBrownColor.opacity(0.5))
+                        .foregroundStyle(Color.AppBrownColor)
+                    }
+                    .contextMenu{
+                        Button(action:{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                                text = gender
+                                pickerIsThere = false
+                                
+                            })
+                            
+                        }){
+                            Text( "Select It . ")
+                        }
+                    }
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray)
+                            .background(Color.AppBrownColor)
+                    )
             }
-            .listRowBackground(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray)
-                    
-                    .background(Color.black)
-            )
-        }
             .listRowSpacing(2)
             .navigationTitle("Gender")
             .navigationBarTitleDisplayMode(.inline)
@@ -228,20 +214,17 @@ extension GenderPicker {
                         focus = true
                         pickerIsThere = false
                     }
-                   
+                    
                 }){
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(Color.white)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(Color.AppBrownColor)
                 }
             }
         }
     }
 }
-
-
-
-
-
 
 struct BtnWithoutBorder: View {
     let  img : String
@@ -262,11 +245,7 @@ struct BtnWithoutBorder: View {
         }
         .padding()
         .foregroundStyle(Color.white)
-        
         .background(color,in: RoundedRectangle(cornerRadius: 30))
-            
-        
-            
     }
 }
 struct BtnWithBorder: View {
@@ -288,8 +267,6 @@ struct BtnWithBorder: View {
         .padding()
         .foregroundStyle(color)
         .background(color,in: RoundedRectangle(cornerRadius: 30).stroke())
-           
-            
     }
 }
 
@@ -297,10 +274,12 @@ struct BtnWithBorder: View {
 struct CommonText: View {
     var title: String
     var foregroundColor: Color = Color.white
+    var fontSize: CGFloat = 20
     
     var body: some View {
         Text(title)
             .foregroundStyle(foregroundColor)
+            .font(.system(size: fontSize))
             .dynamicTypeSize(.medium)
     }
 }
@@ -375,8 +354,6 @@ struct shinkingButton: ButtonStyle {
            
     }
 }
-
-
 
 struct newPreView : View {
     @State var isSelected = false
@@ -485,10 +462,6 @@ struct AlertButtonTintColor: ViewModifier {
     }
 }
 
-
-
-
-
 struct preloader:View {
     @State var appear : Bool = false
     @Environment(\.colorScheme) var colorScheme
@@ -517,8 +490,6 @@ struct preloader:View {
             appear = true
         }
     .padding(30)
-    
-        
     }
 }
 
@@ -567,11 +538,6 @@ struct customColorPicker: View {
     }
 }
 
-
-
-
-
-
 struct Glow : ViewModifier {
     func body (content : Content ) -> some View {
         ZStack {
@@ -587,7 +553,7 @@ struct Glow : ViewModifier {
 
 struct CustomPopupView : View {
     var action : (() -> ())
-    var color : Color = ChatAppModel.shared.themeColor
+    var color : Color = Color.gray //ChatAppModel.shared.themeColor
     var text = """
 • Password Change:  If the password is changed, the user will be automatically logged out.
 
@@ -675,7 +641,7 @@ struct ComplexShapeView : View {
 
 struct commonImageButtonView : View {
     var ImageName :  String = "list.clipboard"
-    var color = ChatAppModel.shared.themeColor
+    var color = Color.gray//ChatAppModel.shared.themeColor
     var opacity : Double = 1.0
     var scale : Double = 1.0
     var degress : Double = 0
@@ -747,4 +713,29 @@ struct NoDataFound : View {
 
 #Preview{
     NoDataFound()
+}
+
+///`RoundedCorners`
+struct RoundedCorner: Shape
+{
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+    func path(in rect: CGRect) -> Path
+    {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+        
+    }
+}
+
+///`CornerRadius`
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(
+            RoundedCorner(
+                radius: radius,
+                corners: corners
+            )
+        )
+    }
 }

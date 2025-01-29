@@ -64,8 +64,11 @@ extension UserDefaults {
               if let index = Constants.predefinedColors.firstIndex(of: newValue) {
                   UserDefaults.standard.set(index, forKey: UserDefaultsKey.kAppThemeColor)
               }
+              
           }
       }
+    
+    
 }
 ///`LoginUser`
 extension UserDefaults {
@@ -86,7 +89,6 @@ extension UserDefaults {
         }
     }
 }
-
 
 /// `UserDefaultsKey`
 struct UserDefaultsKey {
