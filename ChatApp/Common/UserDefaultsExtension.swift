@@ -68,24 +68,24 @@ extension UserDefaults {
       }
 }
 ///`LoginUser`
-//extension UserDefaults {
-//    var loginUser: UserModel? {
-//        get {
-//            if object(forKey: #function) != nil {
-//                if let data = self.value(forKey: #function) as? Data {
-//                    let myObject = try? PropertyListDecoder().decode(UserModel.self, from: data)
-//                    return myObject!
-//                }
-//            }
-//            
-//            return nil
-//        }
-//        set {
-//            set(try? PropertyListEncoder().encode(newValue), forKey: #function)
-//            synchronize()
-//        }
-//    }
-//}
+extension UserDefaults {
+    var loginUser: UserModel? {
+        get {
+            if object(forKey: #function) != nil {
+                if let data = self.value(forKey: #function) as? Data {
+                    let myObject = try? PropertyListDecoder().decode(UserModel.self, from: data)
+                    return myObject!
+                }
+            }
+            
+            return nil
+        }
+        set {
+            set(try? PropertyListEncoder().encode(newValue), forKey: #function)
+            synchronize()
+        }
+    }
+}
 
 
 /// `UserDefaultsKey`
