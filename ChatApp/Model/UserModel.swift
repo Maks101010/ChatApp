@@ -10,7 +10,7 @@
 import Foundation
 
 struct UserModel: Codable {
-    
+    var userId : String?
     var userName : String?
     var gender : String?
     var email : String?
@@ -20,9 +20,10 @@ struct UserModel: Codable {
    
     
     enum CodingKeys: CodingKey {
-        case userName, gender, email, phoneNumber, password,createdDate
+        case userId, userName, gender, email, phoneNumber, password,createdDate
     }
     init?(dictionary : [String : Any]) {
+        self.userId = dictionary["userId"] as? String ?? ""
         self.userName = dictionary["userName"] as? String ?? ""
         self.gender = dictionary["gender"] as? String ?? ""
         self.password = dictionary["password"] as? String ?? ""
@@ -35,6 +36,7 @@ struct UserModel: Codable {
 /** Converts model into dictionary **/
 extension UserModel {
     static func getUserInput(
+        userId : String? = nil,
         userName : String? = nil,
         gender : String? = nil,
         email : String? = nil,
@@ -43,6 +45,7 @@ extension UserModel {
         createdDate : String? = nil
     ) -> [String:Any] {
         var dict: [String:Any] = [:]
+        dict["userId"] = userId ?? ""
         dict["userName"] = userName ?? ""
         dict["gender"] = gender ?? ""
         dict["email"] = email ?? ""

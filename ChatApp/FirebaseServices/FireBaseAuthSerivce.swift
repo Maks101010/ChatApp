@@ -17,7 +17,7 @@ class FireBaseAuthService {
 }
 
 extension FireBaseAuthService {
-    func registerUser (userName : String , email : String , password : String , gender : String , phoneNumber : String , completion : @escaping (_ userModel : UserModel? ) -> Void) {
+    func registerUser (name : String , email : String , password : String , gender : String , phoneNumber : String , completion : @escaping (_ userModel : UserModel? ) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password){
             success ,
             error in
@@ -36,7 +36,8 @@ extension FireBaseAuthService {
             
             
             let userDict : [String : Any] = UserModel.getUserInput(
-                userName: userName,
+                userId: user.uid,
+                userName: name,
                 gender: gender,
                 email: email,
                 phoneNumber: phoneNumber,
@@ -83,7 +84,19 @@ extension FireBaseAuthService {
 }
 
 
-
+extension FireBaseAuthService {
+    func logoutUser(completion: (() -> ())) {
+        do {
+            try Auth.auth().signOut()
+            
+            UserDefaults.standard.loginUser = nil
+            UserDefaults.isLoggedIn = false
+            completion()
+        } catch {
+            Alert.show(message: error.localizedDescription)
+        }
+    }
+}
 
 
 extension FireBaseAuthService {
@@ -92,3 +105,4 @@ extension FireBaseAuthService {
         Alert.show(message: error.localizedDescription)
     }
 }
+

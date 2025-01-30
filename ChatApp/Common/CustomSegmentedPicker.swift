@@ -16,11 +16,11 @@ struct SegmentedPicker: View {
             ForEach(0..<items.count, id: \.self) { index in
                 Button(action: {
                     DispatchQueue.main.async {
-                        withAnimation {
+                        withAnimation (.spring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
                             self.selectedIndex = index
                         }
                     }
-                }) {
+                })  {
                     VStack(spacing: 0) {
                         Text(items[index])
                             .font(.system(size: 16, weight: .bold))

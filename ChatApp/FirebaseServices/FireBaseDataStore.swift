@@ -39,13 +39,15 @@ extension FireBaseDataStore {
     }
 }
 
+
 extension FireBaseDataStore {
     func getUserData(for userID: String , completion :@escaping ((UserModel?) -> ())){
         self.db.getCollection(.users).document(userID).getDocument{ FBData , error in
             if let error = error as? NSError {
                 print("error getting data from UserDocument with id \(userID) , error \(error.localizedDescription) ")
                 Indicator.hide()
-                completion(nil)
+                Alert.show(message: "\(error.localizedDescription)")
+                return
             }
             else {
                 guard let document = FBData else {return}
@@ -55,13 +57,37 @@ extension FireBaseDataStore {
                     completion(messageModel)
                 }
                 catch let error {
-                    print("Error in read(from:ofType:) description= \(error.localizedDescription)")
+                    print("error getting data from UserDocument with id \(userID) , error \(error.localizedDescription) ")
+                    Indicator.hide()
+                    Alert.show(message: "\(error.localizedDescription)")
+                    return
                 }
             }
             
         }
     }
 }
+
+extension FireBaseDataStore {
+    func isUserIDUnique(userID: String, completion: @escaping (Bool) -> Void) {
+        self.db.getCollection(.users).document(userID).getDocument { document, error in
+            if let error = error {
+                print("Error checking user ID uniqueness: \(error.localizedDescription)")
+                completion(false) // Assume not unique if there's an error
+                return
+            }
+            
+            if let document = document, document.exists {
+                completion(false) // User ID already exists
+            } else {
+                completion(true) // User ID is unique
+            }
+        }
+    }
+}
+
+
+
 
 
 extension FireBaseDataStore {
@@ -78,10 +104,63 @@ extension FireBaseDataStore {
 }
 
 extension FireBaseDataStore {
-    func getAllChatDocuments(completion:@escaping (()->())){
-        
+    func setRoomIDs(roomId : String ,completion:@escaping (()->())){
+       self.db.getCollection(.chats).document(roomId).setData(["messages": []]) { error in
+            if let error = error {
+                print("error in generating the room id :   \(error.localizedDescription)")
+            }
+            else {
+                completion()
+            }
+        }
     }
 }
+
+
+extension FireBaseDataStore {
+    func isRoomIDUnique(roomId: String, completion: @escaping (Bool) -> ()) {
+        let chatRef = self.db.getCollection(.chats).document(roomId)
+
+        chatRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error checking room ID \(roomId): \(error.localizedDescription)")
+                completion(false) // Assume room exists in case of an error
+                return
+            }
+            
+            if let document = document, document.exists {
+                // Room ID already exists
+                print("Room ID \(roomId) already exists")
+                completion(false)
+            } else {
+                // Room ID is unique
+                print("Room ID \(roomId) is unique")
+                completion(true)
+            }
+        }
+    }
+}
+
+
+extension FireBaseDataStore {
+    func addMessageToRoom(roomId: String, message: [String: Any], completion: @escaping (() -> ())) {
+        let chatRef = self.db.getCollection(.chats).document(roomId)
+
+        chatRef.updateData([
+            "messages": FieldValue.arrayUnion([message]) // Append message without overwriting
+        ]) { error in
+            if let error = error {
+                print("Error adding message to room \(roomId): \(error.localizedDescription)")
+            } else {
+                completion()
+            }
+        }
+    }
+}
+
+
+
+
 
 
 extension Firestore {

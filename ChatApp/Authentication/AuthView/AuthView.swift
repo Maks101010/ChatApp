@@ -11,6 +11,7 @@ struct AuthView: View {
     
     ///`Declarations
     @StateObject var authVM: AuthViewModel = AuthViewModel()
+    @ObservedObject var viewModel: ChatAppModel = .shared
     @State var selectedIndex: Int = 0
     
     var body: some View {
@@ -32,9 +33,11 @@ struct AuthView: View {
                     ScrollView(showsIndicators: false) {
                         if selectedIndex == 1 {
                             UserRegister()
+                                .padding(.vertical)
                         }
                         else {
                             UserLogin()
+                                .padding(.vertical)
                         }
                     }
                 }
@@ -45,6 +48,25 @@ struct AuthView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear{
+            if UserDefaults.isLoggedIn == true {
+                self.viewModel.isDashBoardShowing = true
+            }
+            
+#if DEBUG
+            self.authVM.txtLoginEmail = "testUser@gmail.com"
+            self.authVM.txtLoginPassword = "12345678"
+            self.authVM.txtRegisterEmail = "testUser@gmail.com"
+            self.authVM.txtPhoneNumber = "1234567890"
+            self.authVM.txtRegisterPassword = "12345678"
+            self.authVM.txtConfirmPassword = "12345678"
+            self.authVM.txtGender = "Male"
+            self.authVM.txtUserName = "testuser"
+#endif
+        }
+        .navigationDestination(isPresented: $viewModel.isDashBoardShowing){
+            DashBoardView()
+        }
     }
 }
 
@@ -56,19 +78,27 @@ extension AuthView {
     
     func UserRegister() -> some View {
         VStack(spacing: 20){
-            TextFieldView(placeholder: "Enter UserName", text: $authVM.txtUserName)
-            TextFieldView(placeholder: "Enter Email Address", text: $authVM.txtRegisterEmail)
+            TextFieldView(placeholder: "Name", text: $authVM.txtUserName)
+                .onChange(of: authVM.txtUserName){
+                    authVM.txtUserName = authVM.txtUserName.trimWhiteSpace.lowercased()
+                }
+            TextFieldView(placeholder: "Email Address", text: $authVM.txtRegisterEmail)
             
-            GenderPicker(placeholder: "Select Gender", text: $authVM.txtGender)
+            GenderPicker(placeholder: "Gender", text: $authVM.txtGender)
             
-            TextFieldView(placeholder: "Enter Phone Number", text: $authVM.txtPhoneNumber)
+            TextFieldView(placeholder: "Phone Number", text: $authVM.txtPhoneNumber)
             
-            SecureFieldView(placeholder: "Enter Password", text: $authVM.txtRegisterPassword)
-            SecureFieldView(placeholder: "Enter Confirm Password", text: $authVM.txtConfirmPassword)
+            SecureFieldView(placeholder: "Password", text: $authVM.txtRegisterPassword)
+            SecureFieldView(placeholder: "Confirm Password", text: $authVM.txtConfirmPassword)
             
             ButtonView(title: "Sign Up") {
-                self.authVM.clickOnRegisterBtn {
-                    Alert.show(message: "Success...")
+                self.authVM.clickOnRegisterBtn {userModel in
+                    if userModel != nil {
+                        viewModel.isDashBoardShowing = true
+                    }
+                    else {
+                        Alert.show(title: "SignUp Failed !!!!!")
+                    }
                 }
             }
         }
@@ -77,13 +107,19 @@ extension AuthView {
     
     func UserLogin() -> some View {
         VStack(spacing: 20) {
-            TextFieldView(placeholder: "Enter Email Address", text: $authVM.txtLoginEmail)
+            TextFieldView(placeholder: "Email Address", text: $authVM.txtLoginEmail)
             
-            SecureFieldView(placeholder: "Enter Password", text: $authVM.txtLoginPassword)
+            SecureFieldView(placeholder: "Password", text: $authVM.txtLoginPassword)
             
             ButtonView(title: "Login") {
-                self.authVM.clickOnLoginBtn {
-                    Alert.show(message: "Success...")
+                self.authVM.clickOnLoginBtn { userModel in
+                    if userModel != nil {
+                        viewModel.isDashBoardShowing = true
+                    }
+                    else {
+                        Indicator.hide()
+                        Alert.show(title: "Login Failed !!!!!")
+                    }
                 }
             }
             .padding(.top,15)

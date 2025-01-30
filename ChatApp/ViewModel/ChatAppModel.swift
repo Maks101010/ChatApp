@@ -13,5 +13,8 @@ import SwiftUI
 class ChatAppModel: ObservableObject {
     init () {}
     static var shared: ChatAppModel = ChatAppModel()
-    @Published var themeColor = Color.gray//UserDefaults.themeColor
+    @Published var themeColor = Color.gray
+    @Published var isDashBoardShowing = false
+    @Published var RoomIds : [String] = []
+    
 }

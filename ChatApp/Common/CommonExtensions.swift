@@ -26,6 +26,7 @@ struct TextFieldView:View {
                 .focused($focus)
                 .background(focus ? Color.AppBrownColor : Color.AppBrownColor ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
                 .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
             Text(placeholder)
                 .padding(.horizontal,5)
@@ -55,18 +56,21 @@ struct SecureFieldView:View {
             HStack {
                 if isSecure {
                     SecureField("", text: $text)
+                        .focused($focus)
+                        .textContentType(.newPassword)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
                 }
                 else {
                     TextField("", text: $text)
+                        .focused($focus)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                 }
                 
                 Button(action: {
                     isSecure.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                        if !focus {
-                            focus = true
-                        }
-                    })
+                    
                 }, label: {
                     isSecure ? Image(systemName: "eye.slash.fill").font(.system(size: 20)).foregroundStyle(Color.gray) : Image(systemName: "eye.fill").font(.system(size: 20)).foregroundStyle(Color.gray)
                 }
@@ -79,7 +83,7 @@ struct SecureFieldView:View {
             
                 .padding(.leading)
                 .frame(height: 50)
-                .focused($focus)
+                
                 .background(focus ? Color.AppBrownColor : Color.AppBrownColor ,in: RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
                 
             Text(placeholder)
@@ -90,7 +94,7 @@ struct SecureFieldView:View {
                 .offset(x : focus || !text.isEmpty ? 5 : 0   , y : focus || !text.isEmpty ? -25 : 0)
                 .scaleEffect(focus   ? 1.1 : 1)
                 .onTapGesture{
-                    focus.toggle()
+                    focus = true
                 }
                 
             
@@ -470,7 +474,7 @@ struct preloader:View {
     ZStack{
         Circle()
             .trim(from: 0,to: 0.3)
-            .stroke(ChatAppModel.shared.themeColor)
+            .stroke(Color.AppBrownColor)
             .frame(width: 70,height: 70)
             . rotationEffect(Angle(degrees: appear ? 360 : 0))
             .animation(.linear(duration: 0.5).repeatForever(autoreverses: false))
@@ -478,7 +482,7 @@ struct preloader:View {
             Circle()
                 
                 .foregroundStyle(
-                    .linearGradient(colors: [ChatAppModel.shared.themeColor,.white,ChatAppModel.shared.themeColor,.black], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .linearGradient(colors: [Color.AppBrownColor,Color.AppBrownColor.opacity(0.5),Color.AppBrownColor.opacity(0.3),Color.AppBrownColor.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
                 . rotationEffect(Angle(degrees: appear ? 0 : 360))
                 .animation(.linear(duration:0.7).repeatForever(autoreverses: true))
                 .frame(width: 50)

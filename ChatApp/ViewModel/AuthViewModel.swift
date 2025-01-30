@@ -18,15 +18,19 @@ class AuthViewModel: ObservableObject {
     @Published var txtLoginPassword: String = ""
     @Published var txtRegisterPassword: String = ""
     @Published var txtConfirmPassword: String = ""
-    
 }
 
 extension AuthViewModel {
     
     ///`Login Button Click Event`
-    func clickOnLoginBtn(completion: @escaping (()->())){
+    func clickOnLoginBtn(completion: @escaping ((UserModel?)->())){
+        
         if isValidForLogin() {
-            completion()
+            Indicator.show()
+            FireBaseAuthService.shared.signIn(with: txtLoginEmail, and: txtLoginPassword){ userModel in
+                completion(userModel)
+            }
+            
         }
     }
     
@@ -47,9 +51,13 @@ extension AuthViewModel {
     }
     
     ///`Register Button Click Event`
-    func clickOnRegisterBtn(completion: @escaping (()->())){
+    func clickOnRegisterBtn(completion: @escaping ((UserModel?)->())){
+        
         if isValidForRegister() {
-            completion()
+            Indicator.show()
+            FireBaseAuthService.shared.registerUser(name: self.txtUserName, email: self.txtRegisterEmail, password: self.txtRegisterPassword, gender: self.txtGender, phoneNumber: self.txtPhoneNumber){userModel in
+                completion(userModel)
+            }
         }
     }
     
@@ -91,6 +99,7 @@ extension AuthViewModel {
             Alert.show(message: "Password Doesn't Match")
             return false
         }
+        
         return true
     }
 }

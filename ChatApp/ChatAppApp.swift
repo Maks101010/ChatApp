@@ -20,9 +20,8 @@ struct ChatAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ZStack(alignment: .topTrailing) {
+            NavigationStack {
                 AuthView()
-                
             }
             .activityIndicator(show: self.showLoader)
             .onReceive(NotificationCenter.default.publisher(for: .showLoader)) { result in
