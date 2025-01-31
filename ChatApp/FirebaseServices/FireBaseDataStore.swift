@@ -11,20 +11,16 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 
-
-
 enum FBDataStoreCollection : String {
     case users = "Users"
     case chats = "Chats"
 }
-
 
 class FireBaseDataStore {
     static let shared : FireBaseDataStore = FireBaseDataStore()
     private init () {}
     let db : Firestore = Firestore.firestore()
 }
-
 
 extension FireBaseDataStore {
     func setUserData (for userID : String, userDict : [String : Any] , completion : @escaping (()->())) {
@@ -38,7 +34,6 @@ extension FireBaseDataStore {
         }
     }
 }
-
 
 extension FireBaseDataStore {
     func getUserData(for userID: String , completion :@escaping ((UserModel?) -> ())){
@@ -86,10 +81,6 @@ extension FireBaseDataStore {
     }
 }
 
-
-
-
-
 extension FireBaseDataStore {
     func setChatData(roomId : String ,chatData : [String : Any] , completion:@escaping (() -> ())){
         self.db.getCollection(.chats).document(roomId).setData(chatData) { error in
@@ -116,7 +107,6 @@ extension FireBaseDataStore {
     }
 }
 
-
 extension FireBaseDataStore {
     func isRoomIDUnique(roomId: String, completion: @escaping (Bool) -> ()) {
         let chatRef = self.db.getCollection(.chats).document(roomId)
@@ -141,7 +131,6 @@ extension FireBaseDataStore {
     }
 }
 
-
 extension FireBaseDataStore {
     func addMessageToRoom(roomId: String, message: [String: Any], completion: @escaping (() -> ())) {
         let chatRef = self.db.getCollection(.chats).document(roomId)
@@ -157,11 +146,6 @@ extension FireBaseDataStore {
         }
     }
 }
-
-
-
-
-
 
 extension Firestore {
     func getCollection(_ collectionPath: FBDataStoreCollection) -> CollectionReference {

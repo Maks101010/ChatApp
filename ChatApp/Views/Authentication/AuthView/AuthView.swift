@@ -20,10 +20,10 @@ struct AuthView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                CommonText(title: "Hey!",fontSize: 30)
+                CommonText(title: "Hey!",fontSize: 30,foregroundColor: Color.white)
                     .padding(.horizontal,15)
                 
-                CommonText(title: selectedIndex != 0 ? "Join Now" : "Welcome Back",fontSize: 30)
+                CommonText(title: selectedIndex != 0 ? "Join Now" : "Welcome Back",fontSize: 30,foregroundColor: Color.white)
                     .padding(.horizontal,15)
                 
                 VStack(spacing: 20) {
@@ -65,7 +65,7 @@ struct AuthView: View {
 #endif
         }
         .navigationDestination(isPresented: $viewModel.isDashBoardShowing){
-            DashBoardView()
+            TabbarView()
         }
     }
 }

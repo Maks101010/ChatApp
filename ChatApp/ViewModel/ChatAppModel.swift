@@ -17,4 +17,6 @@ class ChatAppModel: ObservableObject {
     @Published var isDashBoardShowing = false
     @Published var RoomIds : [String] = []
     
+    @Published var searchText: String = ""
+    
 }

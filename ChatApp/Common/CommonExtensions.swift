@@ -275,19 +275,31 @@ struct BtnWithBorder: View {
 }
 
 
+//struct CommonText: View {
+//    var title: String
+//    var foregroundColor: Color = Color.black
+//    var fontSize: CGFloat = 20
+//    
+//    var body: some View {
+//        Text(title)
+//            .foregroundStyle(foregroundColor)
+//            .font(.system(size: fontSize))
+//            .dynamicTypeSize(.medium)
+//    }
+//}
+
 struct CommonText: View {
     var title: String
-    var foregroundColor: Color = Color.white
     var fontSize: CGFloat = 20
+    var weight: Font.Weight = .regular
+    var foregroundColor: Color = Color.black
     
     var body: some View {
         Text(title)
-            .foregroundStyle(foregroundColor)
-            .font(.system(size: fontSize))
-            .dynamicTypeSize(.medium)
+            .font(.system(size: fontSize, weight: weight))
+            .foregroundColor(foregroundColor)
     }
 }
-
 
 
 

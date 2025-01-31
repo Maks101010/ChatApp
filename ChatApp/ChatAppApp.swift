@@ -22,6 +22,7 @@ struct ChatAppApp: App {
         WindowGroup {
             NavigationStack {
                 AuthView()
+//                TabbarView()
             }
             .activityIndicator(show: self.showLoader)
             .onReceive(NotificationCenter.default.publisher(for: .showLoader)) { result in

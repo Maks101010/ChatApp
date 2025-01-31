@@ -67,8 +67,6 @@ extension UserDefaults {
               
           }
       }
-    
-    
 }
 ///`LoginUser`
 extension UserDefaults {

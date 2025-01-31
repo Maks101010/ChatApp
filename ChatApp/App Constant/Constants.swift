@@ -22,12 +22,14 @@ enum Gender {
     static let kOther                                   = "Other"
 }
 
-struct Constants {
+class Constants {
     
     static let predefinedColors: [Color] = [
         Color.cyan, Color.yellow, Color.blue, Color.purple, Color.brown,
         Color.orange, Color.gray, Color.indigo, Color.mint, Color.pink, Color.teal
         ]
+    
+   
 }
 
 // MARK: - Color Extensions
