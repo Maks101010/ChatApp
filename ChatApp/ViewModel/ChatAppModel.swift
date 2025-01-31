@@ -15,7 +15,7 @@ class ChatAppModel: ObservableObject {
     static var shared: ChatAppModel = ChatAppModel()
     @Published var themeColor = Color.gray
     @Published var isDashBoardShowing = false
-    @Published var RoomIds : [String] = []
+    @Published var chatList : [ChatListModel] = []
     
     @Published var searchText: String = ""
     

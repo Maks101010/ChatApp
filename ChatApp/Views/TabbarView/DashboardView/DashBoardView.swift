@@ -12,22 +12,14 @@ import SwiftUI
 struct DashBoardView : View {
     
     ///`Declarations`
-    @ObservedObject var viewModel : ChatAppModel = .shared
+    @Binding var chatList : [ChatListModel]
     
     var body: some View {
         VStack(spacing: 5) {
-            SearchBarView(searchText: $viewModel.searchText)
-            chatList()
+//            SearchBarView(searchText: viewModel.searchText)
+            theList()
             
-            //            ToolbarItem(placement: .topBarTrailing) {
-            //                Button(action : {
-            //                    FireBaseAuthService.shared.logoutUser {
-            //                        viewModel.isDashBoardShowing = false
-            //                    }
-            //                }){
-            //                    CommonText(title: "Logout")
-            //                }
-            //            }
+           
 
         }
         .padding(.horizontal,15)
@@ -38,37 +30,41 @@ struct DashBoardView : View {
 }
 
 #Preview {
-    DashBoardView(viewModel: ChatAppModel())
+    DashBoardView(chatList:.constant( []))
 }
 
 extension DashBoardView {
     
-    func chatList() -> some View {
+    func theList() -> some View {
         VStack {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 10) {
-                    ForEach(0..<5, id: \.self) { index in
+                    ForEach(chatList, id: \.id) { chat in
                         VStack {
                             HStack(alignment: .top) {
-                                Image(systemName: "photo")
+                                // Profile Image (If needed, replace with actual user image)
+                                Image(systemName: "person.circle.fill")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
                                     .shadow(radius: 5)
+                                    .foregroundColor(.gray)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    
                                     HStack {
-                                        CommonText(title: "Username", fontSize: 18, weight: .semibold)
+                                        // Display User Name
+                                        CommonText(title: chat.userName ?? "Unknown", fontSize: 18, weight: .semibold)
                                         
                                         Spacer()
                                         
-                                        CommonText(title: "Today", fontSize: 14, weight: .regular)
+                                        // Display TimeStamp
+                                        CommonText(title: chat.formattedTime ?? "", fontSize: 14, weight: .regular)
                                             .foregroundColor(.gray)
                                     }
                                     
                                     HStack {
-                                        CommonText(title: "Message", fontSize: 15)
+                                        // Display Last Message
+                                        CommonText(title: chat.lastMessage ?? "No messages yet", fontSize: 15)
                                             .lineLimit(2)
                                             .foregroundColor(.gray)
                                     }

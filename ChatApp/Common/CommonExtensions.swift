@@ -755,3 +755,33 @@ extension View {
         )
     }
 }
+
+struct CommonTextFieldForProfile: View {
+    
+    @Binding var nameOfField: String
+    var placeholderText: String
+    
+    var body: some View {
+        TextField("", text: $nameOfField)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .font(.system(size: 15))
+            .frame(height: 44)
+            .padding(.horizontal,8)
+            .markUnderline(color: Color.AppBrownColor)
+    }
+}
+
+///`markUnderline` Modifier
+extension View {
+    func markUnderline(color: Color, offset: Double = -2.0, height: Double = 1.0) -> some View {
+        self
+            .overlay(
+                Rectangle()
+                    .fill(color)
+                    .frame(height: height)
+                    .offset(y: offset)
+                , alignment: .bottom
+            )
+    }
+}

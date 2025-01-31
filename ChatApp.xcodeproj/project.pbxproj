@@ -131,7 +131,7 @@
 		BFAF7E99BEAC10330038ACF9 /* Build Target */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "-c \"${TARGET_DEVICE_FAMILY}\"";
-			buildConfigurationList = 31FFFDEC2D4CA6D600FD8C4E /* Build configuration list */;
+			buildConfigurationList = 31FFFDEC2D4CA6D600FD8C4E /* Build configuration list for PBXLegacyTarget "Build Target" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/sh;
@@ -671,7 +671,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		31FFFDEC2D4CA6D600FD8C4E /* Build configuration list */ = {
+		31FFFDEC2D4CA6D600FD8C4E /* Build configuration list for PBXLegacyTarget "Build Target" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				31FFFDE82D4CA2B600FD8C4E /* Debug */,
